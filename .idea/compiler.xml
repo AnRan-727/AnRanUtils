@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="ar-common" />
+        <module name="ar-web" />
+        <module name="ar-qrcode" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel target="8">
+      <module name="AnRanUtils" target="1.8" />
+      <module name="ar-common" target="1.8" />
+      <module name="ar-qrcode" target="1.8" />
+      <module name="ar-web" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="AnRanUtils" options="" />
+      <module name="ar-common" options="-parameters" />
+      <module name="ar-qrcode" options="-parameters" />
+      <module name="ar-web" options="-parameters" />
+    </option>
+  </component>
+</project>

@@ -1,0 +1,4 @@
+# Project exclude paths
+/ar-common/target/
+/ar-qrcode/target/
+/ar-web/target/

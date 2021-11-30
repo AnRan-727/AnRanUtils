@@ -9,8 +9,8 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>cn.vxpay</groupId>
-    <artifactId>ar-web</artifactId>
-    <name>ar-web</name>
+    <artifactId>ar-admin</artifactId>
+    <name>ar-admin</name>
     <description>
         web启动
     </description>

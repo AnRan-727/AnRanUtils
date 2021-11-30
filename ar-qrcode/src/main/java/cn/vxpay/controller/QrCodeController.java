@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Date;
 
 /**
  * 二维码模块
@@ -19,6 +20,12 @@ import java.net.URL;
 @RequestMapping(value = "/qrcode")
 @RestController
 public class QrCodeController {
+
+    @RequestMapping(value = "/getList", method = RequestMethod.GET)
+    public ResultInfo getList(){
+
+        return ResultInfo.ok("当前时间："+new Date());
+    }
 
     /**
      * 上传二维码 并识别

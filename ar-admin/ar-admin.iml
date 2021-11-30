@@ -25,6 +25,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="ar-common" />
+    <orderEntry type="module" module-name="ar-qrcode" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-devtools:2.6.0" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot:2.6.0" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-context:5.3.13" level="project" />

@@ -3,9 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AnRanUtils.iml" filepath="$PROJECT_DIR$/AnRanUtils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ar-admin/ar-admin.iml" filepath="$PROJECT_DIR$/ar-admin/ar-admin.iml" />
       <module fileurl="file://$PROJECT_DIR$/ar-common/ar-common.iml" filepath="$PROJECT_DIR$/ar-common/ar-common.iml" />
       <module fileurl="file://$PROJECT_DIR$/ar-qrcode/ar-qrcode.iml" filepath="$PROJECT_DIR$/ar-qrcode/ar-qrcode.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ar-web/ar-web.iml" filepath="$PROJECT_DIR$/ar-web/ar-web.iml" />
     </modules>
   </component>
 </project>

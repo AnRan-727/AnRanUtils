@@ -28,7 +28,7 @@
     <modules>
         <module>ar-common</module>
         <module>ar-qrcode</module>
-        <module>ar-web</module>
+        <module>ar-admin</module>
     </modules>
 
 

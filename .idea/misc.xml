@@ -4,8 +4,6 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/ar-common/pom.xml" />
-        <option value="$PROJECT_DIR$/ar-qrcode/pom.xml" />
         <option value="$PROJECT_DIR$/ar-web/pom.xml" />
       </list>
     </option>

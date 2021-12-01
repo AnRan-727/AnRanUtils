@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/views/Home'
 import Test from '@/views/Test'
-import ApiList from '@/views/ApiList'
+import ApiInfo from '@/views/ApiInfo'
 
 Vue.use(Router)
 
@@ -10,17 +10,14 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Home',
       component: Home
     },
     {
-      path: '/',
-      name: 'ApiList',
-      component: ApiList
+      path: '/apiInfo',
+      component: ApiInfo
     },
     {
-      path: '/',
-      name: 'Test',
+      path: '/test',
       component: Test
     }
   ]

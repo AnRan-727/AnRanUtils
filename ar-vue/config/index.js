@@ -11,11 +11,11 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/': {
+      '/api': {
         target: 'http://127.0.0.1:8000/',
         chunkOrigins: true,//允许跨域
         pathRewrite: {
-          '^/': ''//路径重写 使用“/api”代替target
+          '^/api': ''//路径重写 使用“/api”代替target
         }
       }
     },

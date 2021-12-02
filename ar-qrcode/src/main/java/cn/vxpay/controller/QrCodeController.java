@@ -4,10 +4,7 @@ import cn.vxpay.entity.ApiList;
 import cn.vxpay.entity.ResultInfo;
 import cn.vxpay.utils.QrCodeUtil;
 import com.google.zxing.NotFoundException;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.jws.Oneway;
@@ -68,15 +65,15 @@ public class QrCodeController {
             Map<String,Object> resultMap1 = new HashMap<>();
             resultMap1.put("col","code");
             resultMap1.put("type","int");
-            resultMap1.put("dest","返回结果状态。200：正常；400：错误。");
+            resultMap1.put("dest","返回请求结果状态。200：正常；400：错误。");
             Map<String,Object> resultMap2 = new HashMap<>();
             resultMap2.put("col","msg");
             resultMap2.put("type","string");
-            resultMap2.put("dest","错误提示");
+            resultMap2.put("dest","错误提示，正常时为Null");
             Map<String,Object> resultMap3 = new HashMap<>();
             resultMap3.put("col","data");
             resultMap3.put("type","object");
-            resultMap3.put("dest","返回数据");
+            resultMap3.put("dest","返回数据，错误时为Null");
 
             List<Object> resultList = new ArrayList<>();
             resultList.add(resultMap1);
@@ -108,15 +105,15 @@ public class QrCodeController {
             Map<String,Object> resultMap1 = new HashMap<>();
             resultMap1.put("col","code");
             resultMap1.put("type","int");
-            resultMap1.put("dest","返回结果状态。200：正常；400：错误。");
+            resultMap1.put("dest","返回请求结果状态。200：正常；400：错误。");
             Map<String,Object> resultMap2 = new HashMap<>();
             resultMap2.put("col","msg");
             resultMap2.put("type","string");
-            resultMap2.put("dest","错误提示");
+            resultMap2.put("dest","错误提示，正常时为Null");
             Map<String,Object> resultMap3 = new HashMap<>();
             resultMap3.put("col","data");
             resultMap3.put("type","object");
-            resultMap3.put("dest","返回数据");
+            resultMap3.put("dest","返回数据，错误时为Null");
 
             List<Object> resultList = new ArrayList<>();
             resultList.add(resultMap1);
@@ -133,22 +130,22 @@ public class QrCodeController {
 
     /**
      * 上传二维码 并识别
-     * @param uploadfile
+     * @param file
      * @return
      */
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
-    public ResultInfo upload(@RequestParam("file") MultipartFile uploadfile){
+    public ResultInfo upload(MultipartFile file){
 
-        File file = null;
+        File f = null;
         try {
-            String originalFilename = uploadfile.getOriginalFilename();
+            String originalFilename = file.getOriginalFilename();
             String[] filename = originalFilename.split("\\.");
-            file=File.createTempFile(filename[0], filename[1]);
-            uploadfile.transferTo(file);
-            file.deleteOnExit();
+            f=File.createTempFile(filename[0], filename[1]);
+            file.transferTo(f);
+            f.deleteOnExit();
 
-            String data = QrCodeUtil.decodeQrCode(file);
-            file.delete();
+            String data = QrCodeUtil.decodeQrCode(f);
+            f.delete();
 
             return ResultInfo.ok(data);
 
@@ -159,14 +156,14 @@ public class QrCodeController {
 
     /**
      * 网络路径识别二维码
-     * @param urlStr
+     * @param url
      * @return
      */
     @RequestMapping(value = "/url", method = RequestMethod.POST)
-    public ResultInfo url(@RequestParam("url") String urlStr){
+    public ResultInfo url(String url){
         try {
-            URL url = new URL(urlStr);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            URL uRL = new URL(url);
+            HttpURLConnection conn = (HttpURLConnection) uRL.openConnection();
             conn.setRequestMethod("GET");
             conn.setConnectTimeout(5 * 1000);
             InputStream inputStream = conn.getInputStream();

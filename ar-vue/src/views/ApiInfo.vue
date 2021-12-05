@@ -131,7 +131,6 @@ export default {
         this.request = data.request
         this.format = data.format
         this.path = data.path
-        this.name = data.name
         this.paramData = data.param
         this.resultData = data.result
       }).catch(reason => {

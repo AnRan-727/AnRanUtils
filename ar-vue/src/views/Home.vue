@@ -22,6 +22,8 @@ export default {
   created () {
     this.$axios.get('/qrcode/getApiList').then(res => {
       this.dataArray = res.data.data
+    }).catch(resp => {
+      this.$alert('获取Api列表失败！！！', '温馨提示')
     })
   },
   methods: {

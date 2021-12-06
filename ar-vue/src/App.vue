@@ -12,7 +12,9 @@
         </el-main>
         <!-- 页脚 -->
         <el-footer>
-          <span>Copyright © 2021 Api工具箱</span>
+          <div style="margin-top: 20px;">
+            <span>Copyright © 2021 Api工具箱</span>
+          </div>
         </el-footer>
       </el-container>
     </div>
@@ -39,13 +41,13 @@ export default {
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
   text-align: center;
   font-size: 20px;
+
 }
 
 .el-footer {
   align-content: center;
   text-align: center;
   font-size: 10px;
-  padding-top: 20px;
 }
 
 .layout {

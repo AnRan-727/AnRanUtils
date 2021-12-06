@@ -5,12 +5,13 @@
     <parent>
         <groupId>cn.vxpay</groupId>
         <artifactId>AnRanUtils</artifactId>
-        <version>0.0.1</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
     <groupId>cn.vxpay</groupId>
     <artifactId>ar-admin</artifactId>
     <name>ar-admin</name>
+    <version>0.0.1-SNAPSHOT</version>
     <description>
         web启动
     </description>
@@ -25,11 +26,13 @@
         <dependency>
             <groupId>cn.vxpay</groupId>
             <artifactId>ar-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <!-- 二维码模块 -->
         <dependency>
             <groupId>cn.vxpay</groupId>
             <artifactId>ar-qrcode</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
@@ -41,26 +44,19 @@
                 <version>2.1.1.RELEASE</version>
                 <configuration>
                     <fork>true</fork> <!-- 如果没有该配置，devtools不会生效 -->
+                    <!-- 指定该Main Class为全局的唯一入口 -->
+                    <mainClass>cn.vxpay.ArAdminApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>
                         <goals>
+                            <!-- 可以把依赖的包都打包到生成的Jar包中 -->
                             <goal>repackage</goal>
                         </goals>
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>3.1.0</version>
-                <configuration>
-                    <failOnMissingWebXml>false</failOnMissingWebXml>
-                    <warName>${project.artifactId}</warName>
-                </configuration>
-            </plugin>
         </plugins>
-        <finalName>${project.artifactId}</finalName>
     </build>
 
 </project>

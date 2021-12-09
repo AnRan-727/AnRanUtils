@@ -7,6 +7,15 @@
         {{ dataArray[i].path }}
       </div>
     </el-card>
+    <el-pagination
+      @size-change=handleSizeChange
+      @current-change=page
+      layout="total, sizes, prev, pager, next, jumper"
+      :current-page="currentPage"
+      :page-sizes="[5, 10, 15, 20]"
+      :page-size="pageSize"
+      :total="total">
+    </el-pagination>
   </div>
 </template>
 
@@ -16,19 +25,40 @@ export default {
   name: 'Home',
   data () {
     return {
-      dataArray: []
+      dataArray: [],
+      currentPage: 1,
+      total: 0,
+      pageSize: 5
     }
   },
   created () {
-    this.$axios.get('/qrcode/getApiList').then(res => {
-      this.dataArray = res.data.data
-    }).catch(resp => {
-      this.$alert('获取Api列表失败！！！', '温馨提示')
-    })
+    this.page(1)
   },
   methods: {
     toApiInfo (v, e) {
       this.$router.push({path: v.view, query: {id: v.id}})
+    },
+    page (currentPage) {
+      this.getApiList(currentPage, this.pageSize)
+    },
+    handleSizeChange (size) {
+      this.getApiList(this.currentPage, size)
+    },
+    getApiList (page, pageSize) {
+      const _this = this
+      _this.$axios.get('/getApiList', {
+        params: {
+          page: page,
+          pageSize: pageSize
+        }
+      }).then(res => {
+        _this.dataArray = res.data.data.list
+        _this.currentPage = res.data.data.pageNum
+        _this.total = res.data.data.total
+        _this.pageSize = res.data.data.pageSize
+      }).catch(resp => {
+        _this.$alert('获取Api列表失败！！！', '温馨提示')
+      })
     }
   }
 }

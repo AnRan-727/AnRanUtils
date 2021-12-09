@@ -9,30 +9,22 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
     <groupId>cn.vxpay</groupId>
-    <artifactId>ar-qrcode</artifactId>
-    <name>ar-qrcode</name>
+    <artifactId>ar-hero</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <name>ar-hero</name>
     <packaging>jar</packaging>
     <description>
-        二维码模块
+        王者荣耀模块
     </description>
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
     <dependencies>
         <!-- 公共模块 -->
         <dependency>
             <groupId>cn.vxpay</groupId>
             <artifactId>ar-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <!-- 二维码 -->
-        <dependency>
-            <groupId>com.google.zxing</groupId>
-            <artifactId>core</artifactId>
-            <version>3.4.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.zxing</groupId>
-            <artifactId>javase</artifactId>
-            <version>3.4.0</version>
         </dependency>
     </dependencies>
 

@@ -34,6 +34,12 @@
             <artifactId>ar-qrcode</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <!-- 王者荣耀模块 -->
+        <dependency>
+            <groupId>cn.vxpay</groupId>
+            <artifactId>ar-hero</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>

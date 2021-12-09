@@ -7,8 +7,9 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="ar-common" />
+        <module name="ar-hero" />
         <module name="ar-admin" />
+        <module name="ar-common" />
         <module name="ar-qrcode" />
       </profile>
     </annotationProcessing>
@@ -16,7 +17,9 @@
       <module name="AnRanUtils" target="1.8" />
       <module name="ar-admin" target="1.8" />
       <module name="ar-common" target="1.8" />
+      <module name="ar-hero" target="1.8" />
       <module name="ar-qrcode" target="1.8" />
+      <module name="ar-word" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -24,7 +27,9 @@
       <module name="AnRanUtils" options="" />
       <module name="ar-admin" options="-parameters" />
       <module name="ar-common" options="-parameters" />
+      <module name="ar-hero" options="-parameters" />
       <module name="ar-qrcode" options="-parameters" />
+      <module name="ar-word" options="-parameters" />
     </option>
   </component>
 </project>

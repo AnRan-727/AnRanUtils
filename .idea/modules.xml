@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/AnRanUtils.iml" filepath="$PROJECT_DIR$/AnRanUtils.iml" />
       <module fileurl="file://$PROJECT_DIR$/ar-admin/ar-admin.iml" filepath="$PROJECT_DIR$/ar-admin/ar-admin.iml" />
       <module fileurl="file://$PROJECT_DIR$/ar-common/ar-common.iml" filepath="$PROJECT_DIR$/ar-common/ar-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ar-hero/ar-hero.iml" filepath="$PROJECT_DIR$/ar-hero/ar-hero.iml" />
       <module fileurl="file://$PROJECT_DIR$/ar-qrcode/ar-qrcode.iml" filepath="$PROJECT_DIR$/ar-qrcode/ar-qrcode.iml" />
     </modules>
   </component>

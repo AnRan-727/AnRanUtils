@@ -5,6 +5,7 @@
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/ar-web/pom.xml" />
+        <option value="$PROJECT_DIR$/ar-hero/pom.xml" />
       </list>
     </option>
   </component>

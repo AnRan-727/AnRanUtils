@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/views/Home'
 import HeroList from '@/views/HeroList'
+import HeroGrade from '@/views/HeroGrade'
 import ApiInfo from '@/views/ApiInfo'
 
 Vue.use(Router)
@@ -19,6 +20,10 @@ export default new Router({
     {
       path: '/heroList',
       component: HeroList
+    },
+    {
+      path: '/heroGrade',
+      component: HeroGrade
     }
   ]
 })

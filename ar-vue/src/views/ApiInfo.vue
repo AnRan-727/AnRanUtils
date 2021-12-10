@@ -1,5 +1,7 @@
 <template>
-  <div style="width: 80%;margin: 0 auto;">
+  <div style="margin: 0 auto;">
+    <el-page-header title="返回" :content="name" @back="goBack">
+    </el-page-header>
     <div class="el-card-div">
       <el-card shadow="hover" border-radius='130'>
         <el-descriptions title="接口信息" :column="2" :colon="false" border>
@@ -20,8 +22,8 @@
     </div>
 
     <div class="el-card-div">
-      <el-card shadow="hover" style="text-align: left">
-        <span style="font-size: 16px;">接口参数</span>
+      <el-card shadow="hover">
+        <span style="font-size: 14px;">接口参数</span>
         <el-table :data="paramData">
           <el-table-column prop="param" label="参数名称"></el-table-column>
           <el-table-column prop="check" label="是否必填"></el-table-column>
@@ -33,7 +35,7 @@
 
     <div class="el-card-div">
       <el-card shadow="hover" style="text-align: left">
-        <span style="font-size: 16px;">返回说明</span>
+        <span style="font-size: 14px;">返回说明</span>
         <el-table :data="resultData">
           <el-table-column prop="col" label="字段名称"></el-table-column>
           <el-table-column prop="type" label="字段类型"></el-table-column>
@@ -165,6 +167,9 @@ export default {
     },
     onUpload () {
       this.$refs.imgFile.submit()
+    },
+    goBack () {
+      this.$router.go(-1)
     }
   }
 }

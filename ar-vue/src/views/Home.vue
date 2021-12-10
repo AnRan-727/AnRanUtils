@@ -10,10 +10,8 @@
     <el-pagination
       @size-change=handleSizeChange
       @current-change=page
-      layout="total, sizes, prev, pager, next, jumper"
-      :current-page="currentPage"
-      :page-sizes="[5, 10, 15, 20]"
-      :page-size="pageSize"
+      small
+      layout="prev, pager, next"
       :total="total">
     </el-pagination>
   </div>

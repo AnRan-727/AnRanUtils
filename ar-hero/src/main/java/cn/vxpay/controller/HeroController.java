@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * 王者荣耀模块
@@ -24,26 +25,63 @@ public class HeroController {
 
     List<HeroDate> heroDates = null;
 
+    /**
+     * 获取所有的英雄
+     * @return
+     */
     @RequestMapping(value = "/getHeroList", method = RequestMethod.GET)
-    public ResultInfo getHeroList(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "5") Integer pageSize) {
+    public ResultInfo getHeroList() {
         if(heroDates == null){
             this.getHeroDateList();
         }
-        //创建Page类
-        Page page1 = new Page(page, pageSize);
-        //为Page类中的total属性赋值
-        int total = heroDates.size();
-        page1.setTotal(total);
-        //计算当前需要显示的数据下标起始值
-        int startIndex = (page - 1) * pageSize;
-        int endIndex = Math.min(startIndex + pageSize, total);
-        //从链表中截取需要显示的子链表，并加入到Page
-        page1.addAll(heroDates.subList(startIndex, endIndex));
-        //以Page创建PageInfo
-        PageInfo pageInfo = new PageInfo<>(page1);
-
-        return ResultInfo.ok(pageInfo);
+        return ResultInfo.ok(heroDates);
     }
+
+    /**
+     * 按名称搜索英雄
+     * @return
+     */
+    @RequestMapping(value = "/getHeroByName", method = RequestMethod.GET)
+    public ResultInfo getHeroByName(String name) {
+        if(heroDates == null){
+            this.getHeroDateList();
+        }
+        if(name.equals("")){
+            return ResultInfo.ok(heroDates);
+        }
+        Stream<HeroDate> heroDateStream = heroDates.stream().filter(heroDate -> {
+            if(heroDate.getTitle() != null || heroDate.getTitle() != ""){
+                return heroDate.getTitle().equals(name);
+            }else{
+                return true;
+            }
+        });
+        return ResultInfo.ok(heroDateStream);
+    }
+    /**
+     * 按类型搜索英雄
+     * @return
+     */
+    @RequestMapping(value = "/getHeroByType", method = RequestMethod.GET)
+    public ResultInfo getHeroByType(String type) {
+        if(heroDates == null){
+            this.getHeroDateList();
+        }
+        if(type.equals("")){
+            return ResultInfo.ok(heroDates);
+        }
+        Stream<HeroDate> heroDateStream = heroDates.stream().filter(heroDate -> {
+            if(heroDate.getOccupation() != null || heroDate.getOccupation() != "" ){
+                return heroDate.getOccupation().equals(type);
+            }else{
+                return true;
+            }
+        });
+        return ResultInfo.ok(heroDateStream);
+    }
+
+
+
 
     private List<HeroDate> getHeroDateList() {
         do {

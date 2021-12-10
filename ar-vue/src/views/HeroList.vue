@@ -1,51 +1,31 @@
 <template>
   <div>
-    <el-table
-      :data="tableData"
-      style="margin: 0 auto;width: 90%"
-      :default-sort = "{prop: 'heroid', order: 'descending'}"
-    >
-      <el-table-column
-        prop="title"
-        label="英雄名称"
-        width="150"
-        sortable>
-      </el-table-column>
-      <el-table-column
-        prop="pinyin"
-        label="拼音"
-        width="150"
-        sortable>
-      </el-table-column>
-      <el-table-column
-        prop="faceimg"
-        width="150"
-        label="英雄头像">
-        <template slot-scope="scope">
-          <img :src="scope.row.faceimg">
-        </template>
-      </el-table-column>
-      <el-table-column
-        prop="occupation"
-        label="类型"
-        width="150"
-        sortable>
-      </el-table-column>
-      <el-table-column
-        prop="infourl"
-        label="详情">
-      </el-table-column>
-    </el-table>
+    <el-page-header title="返回" content="王者荣耀" @back="goBack">
+    </el-page-header>
     <br>
-    <el-pagination
-      @size-change=handleSizeChange
-      @current-change=page
-      layout="total, sizes, prev, pager, next, jumper"
-      :current-page="currentPage"
-      :page-sizes="[5, 10, 15, 20]"
-      :page-size="pageSize"
-      :total="total">
-    </el-pagination>
+    <div>
+      <el-input
+        placeholder="英雄类型"
+        prefix-icon="el-icon-search"
+        style="max-width: 205px;margin-bottom: 5px;"
+        @input="onTypeInput"
+        v-model="type">
+      </el-input>
+      <el-input
+        placeholder="英雄名称"
+        prefix-icon="el-icon-search"
+        style="max-width: 205px"
+        @input="onNameInput"
+        v-model="name">
+      </el-input>
+    </div>
+    <el-card class="box-card" shadow="hover" body-style="border-radius：50px;" v-for="(v,i) in heroData" :key="i" @click.native="toHeroGrade(v.title)">
+      <div class="text item">
+        <span style="font-size:10px;">{{ v.title }}</span>
+        <br>
+        <el-avatar shape="square" :src="v.faceimg"></el-avatar>
+      </div>
+    </el-card>
   </div>
 </template>
 
@@ -54,37 +34,53 @@ export default {
   name: 'HeroList',
   data () {
     return {
-      tableData: [],
-      currentPage: 1,
-      total: 0,
-      pageSize: 5
+      name: '',
+      type: '',
+      heroData: []
     }
   },
   created () {
     this.getHeroList()
   },
   methods: {
-    getHeroList (page, pageSize) {
+    getHeroList () {
       const _this = this
-      _this.$axios.get('/hero/getHeroList', {
-        params: {
-          page: page,
-          pageSize: pageSize
-        }
-      }).then(res => {
-        _this.tableData = res.data.data.list
-        _this.currentPage = res.data.data.pageNum
-        _this.total = res.data.data.total
-        _this.pageSize = res.data.data.pageSize
+      _this.$axios.get('/hero/getHeroList').then(res => {
+        _this.heroData = res.data.data
       }).catch(resp => {
         _this.$alert('请求失败！！！', '温馨提示')
       })
     },
-    page (currentPage) {
-      this.getHeroList(currentPage, this.pageSize)
+    onNameInput () {
+      const _this = this
+      _this.$axios.get('/hero/getHeroByName', {
+        params: {
+          name: _this.name
+        }
+      }).then(res => {
+        _this.heroData = res.data.data
+      }).catch(resp => {
+        _this.$alert('请求失败！！！', '温馨提示')
+      })
     },
-    handleSizeChange (size) {
-      this.getHeroList(this.currentPage, size)
+    onTypeInput () {
+      const _this = this
+      _this.$axios.get('/hero/getHeroByType', {
+        params: {
+          type: _this.type
+        }
+      }).then(res => {
+        _this.heroData = res.data.data
+      }).catch(resp => {
+        _this.$alert('请求失败！！！', '温馨提示')
+      })
+    },
+    goBack () {
+      this.$router.go(-1)
+    },
+    toHeroGrade (v) {
+      const _this = this
+      _this.$router.push({path: '/heroGrade', query: {name: v}})
     }
   }
 }
@@ -92,4 +88,14 @@ export default {
 
 <style scoped>
 
+.item {
+  margin-top: -20px;
+  margin-bottom: -10px;
+}
+
+.box-card {
+  width: 90px;
+  display: inline-block;
+  margin: 10px;
+}
 </style>

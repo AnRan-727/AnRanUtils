@@ -12,6 +12,7 @@
       @current-change=page
       small
       layout="prev, pager, next"
+      :hide-on-single-page="true"
       :total="total">
     </el-pagination>
   </div>

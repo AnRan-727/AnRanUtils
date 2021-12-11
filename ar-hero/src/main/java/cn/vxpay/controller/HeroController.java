@@ -2,17 +2,22 @@ package cn.vxpay.controller;
 
 import cn.hutool.http.Header;
 import cn.hutool.http.HttpRequest;
+import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONArray;
 import cn.vxpay.entity.HeroDate;
+import cn.vxpay.entity.HeroGrade;
 import cn.vxpay.entity.ResultInfo;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Comparator;
-import java.util.List;
+import java.nio.charset.Charset;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -80,6 +85,80 @@ public class HeroController {
         return ResultInfo.ok(heroDateStream);
     }
 
+    /**
+     * 获取英雄战力
+     * @param name 英雄名称
+     * @return
+     */
+    @RequestMapping(value = "/getHeroGrade", method = RequestMethod.GET)
+    public ResultInfo getHeroGrade(String name){
+        List<Grade> qq = this.getHeroGradeData(name, "qq");
+        List<Grade> wx = this.getHeroGradeData(name, "wx");
+        List<Grade> ios_qq = this.getHeroGradeData(name, "ios_qq");
+        List<Grade> ios_wx = this.getHeroGradeData(name, "ios_wx");
+
+        Map<String , Object> map = new HashMap<>();
+        map.put("qq",qq);
+        map.put("wx",wx);
+        map.put("ios_qq",ios_qq);
+        map.put("ios_wx",ios_wx);
+        return ResultInfo.ok(map);
+    }
+
+
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    class Grade {
+
+        /** 级别 */
+        private String grade;
+        /** 地区 */
+        private String region;
+        /** 分数 */
+        private Integer points;
+
+    }
+
+
+    public static void main(String[] args) {
+        String name = "妲己";
+        String type = "qq";
+        try {
+            String url = "https://www.jk.cxkf.cc/api_select.php";
+            Map<String,Object> form = new HashMap<>();
+            form.put("hero",name);
+            form.put("type",type);
+            String s = HttpUtil.get(url, form);
+            JSONObject jsonObject = JSON.parseObject(s);
+            HeroGrade heroGrade = JSON.parseObject(jsonObject.get("data").toString(), HeroGrade.class);
+            System.out.println(heroGrade);
+        }catch (Exception e){
+            e.getMessage();
+        }
+    }
+
+    private List<Grade> getHeroGradeData(String name, String type){
+        try {
+            //String url = "https://www.jk.cxkf.cc/api_select.php";
+            String url = "https://www.somekey.cn/mini/hero/getHeroInfo.php";
+            Map<String,Object> form = new HashMap<>();
+            form.put("hero",name);
+            form.put("type",type);
+            String s = HttpUtil.get(url, form);
+            JSONObject jsonObject = JSON.parseObject(s);
+            HeroGrade heroGrade = JSON.parseObject(jsonObject.get("data").toString(), HeroGrade.class);
+            List<Grade> list = new ArrayList<>();
+            list.add(new Grade("区级", heroGrade.getArea(), Integer.parseInt(heroGrade.getAreaPower())));
+            list.add(new Grade("市级", heroGrade.getCity(), Integer.parseInt(heroGrade.getCityPower())));
+            list.add(new Grade("省级", heroGrade.getProvince(), Integer.parseInt(heroGrade.getProvincePower())));
+
+            return list;
+        }catch (Exception e){
+            e.getMessage();
+        }
+        return null;
+    }
 
 
 

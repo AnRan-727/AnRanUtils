@@ -3,7 +3,7 @@
     <el-page-header title="返回" content="王者荣耀" @back="goBack">
     </el-page-header>
     <br>
-    <div>
+    <div v-loading="loading">
       <el-input
         placeholder="英雄类型"
         prefix-icon="el-icon-search"
@@ -36,7 +36,8 @@ export default {
     return {
       name: '',
       type: '',
-      heroData: []
+      heroData: [],
+      loading: true
     }
   },
   created () {
@@ -46,8 +47,10 @@ export default {
     getHeroList () {
       const _this = this
       _this.$axios.get('/hero/getHeroList').then(res => {
+        _this.loading = false
         _this.heroData = res.data.data
       }).catch(resp => {
+        _this.loading = false
         _this.$alert('请求失败！！！', '温馨提示')
       })
     },

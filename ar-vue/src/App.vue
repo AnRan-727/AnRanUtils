@@ -1,23 +1,23 @@
 <template>
   <div id='app'>
-    <div class="layout">
+<!--    <div class="layout">
       <el-container>
-        <!-- 顶部 -->
+        &lt;!&ndash; 顶部 &ndash;&gt;
         <el-header>
           Api工具箱
         </el-header>
-        <!-- 内容 -->
-        <el-main>
+        &lt;!&ndash; 内容 &ndash;&gt;
+        <el-main>-->
           <router-view></router-view>
-        </el-main>
-        <!-- 页脚 -->
+<!--        </el-main>
+        &lt;!&ndash; 页脚 &ndash;&gt;
         <el-footer>
           <div style="margin-top: 20px;">
             <span>Copyright © 2021 Api工具箱</span>
           </div>
         </el-footer>
       </el-container>
-    </div>
+    </div>-->
   </div>
 </template>
 
